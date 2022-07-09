@@ -32,12 +32,15 @@ body {
 .header, .headerButtons, .topHeader {
     background-color: #9333ea;
 }
+
 .addList:hover {
     background-color: #c4b5fd;
     border-radius: 200px;
     padding: 30px;
     margin: 10px;
-    transition: 0.3s;
+    transition: 0.1s;
+    border: 5px solid black;
+    
 }
 /*------------------------------------------------------*/
 .sideNav {
@@ -57,25 +60,25 @@ body {
     text-align: center;
 }
 /*------------------------------------------------------*/
-ul, li {
+.ulSideNav, .liSideNav {
     list-style: none;
     padding: 10px;
     margin: 0;
 }
-li {
+.liSideNav {
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     border-radius: 10px;
     margin: 10px;
 }
-li:hover {
+.liSideNav:hover {
     background-color: #cbd5e1;
     font-size: 15px;
     padding: 20px;
     transition: 0.3s;
     transition-timing-function: ease-in-out;
 }
-svg, li {
+svg, .liSideNav {
     display:inline-block;
     vertical-align: middle;
 }

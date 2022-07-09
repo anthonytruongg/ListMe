@@ -1,0 +1,1 @@
+(()=>{"use strict";!function(){const e=document.querySelector(".modal"),t=document.querySelector(".addTask"),c=document.querySelector(".close-button");function n(){e.classList.toggle("show-modal")}t.addEventListener("click",n),c.addEventListener("click",n),window.addEventListener("click",(function(t){t.target===e&&n()}))}()})();
