@@ -39,7 +39,7 @@ body {
     padding: 30px;
     margin: 10px;
     transition: 0.1s;
-    border: 5px solid black;
+    border: 5px solid rgb(255, 255, 255);
     
 }
 /*------------------------------------------------------*/
@@ -51,7 +51,6 @@ body {
     display: flex;
     justify-content: center;
 }
-
 .mainBody {
     /* border: 1px solid black; */
     height: 100vh;
