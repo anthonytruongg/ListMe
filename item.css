@@ -77,7 +77,8 @@ input, select, textarea {
     padding: 20px;
     margin: 40px;
     margin-bottom: 10px;
-    width: 800px;
+    width: 500px;
+    font-size: 10px;
 
 }
 .item:hover {
@@ -86,9 +87,11 @@ input, select, textarea {
     padding: 20px;
     /* transition: 0.3s; */
     transition: all 0.2s ease-out;
+    word-wrap: break-word;
+    border-radius: 50px;
 }
 /* This is code for when a task is actively opened */
-.itemActive {
+/* .itemActive {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin: 40px;
@@ -99,4 +102,4 @@ input, select, textarea {
     padding: 20px;
 
     display: none;
-}
+} */

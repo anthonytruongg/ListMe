@@ -8,6 +8,7 @@ body {
     background: #c4b5fd;
     display: grid;
     grid-template-columns: 200px 5fr;
+    grid-template-rows: min-content 1fr;
 }
 
 /*------------------------------------------------------*/
@@ -50,15 +51,14 @@ body {
 .mainBody {
     grid-column: 2 / 2;
     /* border: 1px solid black; */
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .mainHeading {
     text-align: left;
-    font-size: 56px;
-    padding: 50px;
+    font-size: 46px;
+    padding: 20px;
 }
 /*------------------------------------------------------*/
 .sideNav {
