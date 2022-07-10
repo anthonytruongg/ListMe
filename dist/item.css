@@ -77,6 +77,7 @@ input, select, textarea {
     padding: 20px;
     margin: 40px;
     margin-bottom: 10px;
+    width: 800px;
 
 }
 .item:hover {
@@ -98,15 +99,4 @@ input, select, textarea {
     padding: 20px;
 
     display: none;
-}
-.itemExpanded {
-    border-radius: 10px;
-    background-color: white;
-    font-size: 15px;
-    padding: 20px;
-    margin: 100px;
-    margin-top: 0;
-
-    display: none;
-
 }

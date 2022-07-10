@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  target: 'async-node',
     mode: 'production',
     entry: './src/index.js',
     output: {
