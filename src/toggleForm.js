@@ -1,9 +1,11 @@
 import task from "./taskDetails";
 
+
 export function toggleModal() {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('show-modal');
 }
+
 export function windowOnClick(event) {
     const modal = document.querySelector('.modal');
     const addButton = document.querySelector('.submit');
@@ -12,7 +14,6 @@ export function windowOnClick(event) {
         toggleModal();
     }
 }
-
 const mainBody = document.querySelector('.mainBody');
 const taskArray = [];
 
@@ -29,6 +30,7 @@ export function createTask(e) {
     
     taskArray.push(newTask);
 
+    // KEEPING TRACK OF ARRAY
     console.log(taskArray);
 
     const taskDiv = document.createElement('div');
@@ -37,19 +39,17 @@ export function createTask(e) {
     const taskTitle = document.createElement('h1');
     const taskDate = document.createElement('p');
     const taskDescription = document.createElement('p');
-    const taskPriority = document.createElement('p');
 
 
     taskArray.forEach(task => {
-        taskTitle.textContent = task.title;
+        taskTitle.textContent = 'Title: ' + task.title;
         taskDiv.appendChild(taskTitle);
 
-        taskDate.textContent = task.date;
+        taskDate.textContent = 'Due Date: ' + task.date;
         taskDiv.appendChild(taskDate);
 
-        taskDescription.textContent = task.description;
+        taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
-
 
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';
@@ -62,10 +62,10 @@ export function createTask(e) {
         }
         mainBody.appendChild(taskDiv);
     })
-
-
-    // toggles the full description of task
-        
-
     document.getElementById("taskForm").reset();
+}
+
+export function toggleNav() {
+    const sideNav = document.querySelector('.sideNav');
+    sideNav.classList.toggle('sideNav-open');
 }
