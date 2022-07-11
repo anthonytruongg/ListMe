@@ -39,17 +39,24 @@ export function createTask(e) {
     const taskTitle = document.createElement('h1');
     const taskDate = document.createElement('p');
     const taskDescription = document.createElement('p');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete');
 
 
     taskArray.forEach(task => {
+        taskDiv.setAttribute('id', task.id);
         taskTitle.textContent = 'Title: ' + task.title;
         taskDiv.appendChild(taskTitle);
 
-        taskDate.textContent = 'Due Date: ' + task.date;
-        taskDiv.appendChild(taskDate);
-
+        deleteButton.textContent = 'X';
+        taskDiv.appendChild(deleteButton);
+        
         taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
+        
+        taskDate.textContent = 'Due Date: ' + task.date;
+        taskDiv.appendChild(taskDate);
+        
 
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';
@@ -68,4 +75,12 @@ export function createTask(e) {
 export function toggleNav() {
     const sideNav = document.querySelector('.sideNav');
     sideNav.classList.toggle('sideNav-open');
+}
+
+export function removeTask(e) {
+    const getTask = (id) => taskArray.find(task => task.id === id);
+    const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
+    deleteTask(e.target.parentNode.id);
+
+    console.log("REMOVING TASK");
 }

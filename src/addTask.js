@@ -4,6 +4,7 @@ import {
     windowOnClick, 
     createTask,
     toggleNav, 
+    removeTask,
 } from './toggleForm';
 
 function createListForm() {
@@ -19,8 +20,15 @@ function createListForm() {
     const addButton = document.querySelector('.submit');
     addButton.addEventListener('click', createTask);
     // -------------------------------------------
-    // TOGGLING TASK CONTENTS
-    
+    // REMOVING TASKS
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete')) {
+            removeTask(e);
+            let theButton = e.target;
+            let theTask = theButton.parentNode;
+            theTask.remove();
+        }
+    });
     // -------------------------------------------
     // TOGGLING SIDE NAV BAR
     const menu = document.querySelector('.menuButton');
