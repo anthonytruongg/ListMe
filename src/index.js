@@ -1,5 +1,8 @@
-import createListForm from './addTask';
-import { createHomePage } from './homePage';
+import DOMevents from './addTask';
+import { printOriginalArray, printTask } from './displayTasks';
 
-createListForm();
+// printing temp task to organize
+printOriginalArray();
+
+DOMevents();
 

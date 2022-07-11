@@ -15,7 +15,12 @@ export function windowOnClick(event) {
     }
 }
 const mainBody = document.querySelector('.mainBody');
-const taskArray = [];
+export const taskArray = [ 
+    new task('Task 1', 'This is a task', '2022-08-04', '1'),
+    new task('Task 2', 'This is a task', '2022-07-23', '2'),
+    new task('Task 3', 'This is a task', '2022-07-12', '3'),
+    new task('Task 4', 'This is a task', '2022-07-11', '4'),
+];
 
 export function createTask(e) {
     

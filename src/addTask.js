@@ -9,12 +9,15 @@ import {
 
 import {
     createInboxPage, 
-    createHomePage 
-} from './homePage';
+    createHomePage,
+    createTodayPage,
+    createProjectPage,
+} from './switchingTabs';
 
 import clearContents from './clearContents';
 
-function createListForm() {
+
+function DOMevents() {
     // POP UP MODAL FORM
     const trigger = document.querySelector('.addTask');
     const closeButton = document.querySelector('.close-button');
@@ -54,6 +57,22 @@ function createListForm() {
         clearContents();
         createHomePage();
     });
+    // -------------------------------------------
+    // CREATING TODAY PAGE
+    const today = document.getElementById('today');
+    today.addEventListener('click', () => {
+        clearContents();
+        createTodayPage();
+    });
+    // -------------------------------------------
+    // CREATING PROJECT PAGE
+    const projects = document.getElementById('projects');
+    projects.addEventListener('click', () => {
+        clearContents();
+        createProjectPage();
+    });
+
+
 }
 
-export default createListForm;
+export default DOMevents;
