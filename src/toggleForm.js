@@ -54,7 +54,7 @@ export function createTask(e) {
         taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
 
-        const dateFormat = format(parseISO(task.date), 'MM.dd.yyyy');
+        const dateFormat = format(parseISO(task.date), 'MM/dd/yyyy');
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
         

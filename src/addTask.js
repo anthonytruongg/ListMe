@@ -7,6 +7,13 @@ import {
     removeTask,
 } from './toggleForm';
 
+import {
+    createInboxPage, 
+    createHomePage 
+} from './homePage';
+
+import clearContents from './clearContents';
+
 function createListForm() {
     // POP UP MODAL FORM
     const trigger = document.querySelector('.addTask');
@@ -33,6 +40,20 @@ function createListForm() {
     // TOGGLING SIDE NAV BAR
     const menu = document.querySelector('.menuButton');
     menu.addEventListener('click', toggleNav);
+    // -------------------------------------------
+    // CREATING INBOX PAGE
+    const inbox = document.getElementById('inbox');
+    inbox.addEventListener('click', () => {
+        clearContents();
+        createInboxPage();
+    });
+    // -------------------------------------------
+    // CREATING HOME PAGE
+    const home = document.querySelector('.homeButton');
+    home.addEventListener('click', () => {
+        clearContents();
+        createHomePage();
+    });
 }
 
 export default createListForm;
