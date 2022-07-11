@@ -45,7 +45,7 @@ export function createTask(e) {
 
     taskArray.forEach(task => {
         taskDiv.setAttribute('id', task.id);
-        taskTitle.textContent = 'Title: ' + task.title;
+        taskTitle.textContent = task.title;
         taskDiv.appendChild(taskTitle);
 
         deleteButton.textContent = 'X';
@@ -53,7 +53,7 @@ export function createTask(e) {
         
         taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
-        
+
         taskDate.textContent = 'Due Date: ' + task.date;
         taskDiv.appendChild(taskDate);
         
