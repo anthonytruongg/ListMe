@@ -1,5 +1,5 @@
 import task from "./taskDetails";
-
+import { format, parseISO } from "date-fns";
 
 export function toggleModal() {
     const modal = document.querySelector('.modal');
@@ -54,7 +54,8 @@ export function createTask(e) {
         taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
 
-        taskDate.textContent = 'Due Date: ' + task.date;
+        const dateFormat = format(parseISO(task.date), 'MM.dd.yyyy');
+        taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
         
 
