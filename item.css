@@ -95,7 +95,7 @@ input, select, textarea {
 
 /*------------------------------------------------------*/
 .item {
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: white;
     padding: 20px;
     margin: 20px;
@@ -115,11 +115,11 @@ input, select, textarea {
 .item:hover {
     background-color: #cbd5e1;
     box-shadow: 0px 0px 10px #8b8383;
-    font-size: 10px;
-    /* padding: 20px; */
+    font-size: 12px;
+    padding: 10px;
     transform: scale(1.2);
+    /* transition: 0.2s; */
     transition: all 0.3s ease-out;
-    border-radius: 20px;
 
     word-wrap: break-word;
     white-space: pre-wrap;
