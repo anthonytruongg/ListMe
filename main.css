@@ -6,9 +6,13 @@ body {
 }
 .container {
     background: #c4b5fd;
-    display: grid;
+    /* display: grid;
     grid-template-columns: 200px 5fr;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content 1fr; */
+    display: flex;
+}
+.containerTwo {
+    padding: 30px;
 }
 
 /*------------------------------------------------------*/
@@ -24,6 +28,7 @@ body {
     text-align: center;
     /* border: 1px solid black; */
     font-size: 20px;
+    padding: 20px;
 }
 .headerButtons {
     padding: 20px;
@@ -53,10 +58,11 @@ body {
     /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    max-height: 100vh;
+    padding: 10px;
 }
 .mainHeading {
-    text-align: left;
     font-size: 46px;
     padding: 20px;
 }
@@ -75,7 +81,8 @@ body {
     /* border: 1px solid black; */
     background-color: #ddd6fe;
     padding: 20px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px;
     justify-content: center;
     height: 100vh;
 }
