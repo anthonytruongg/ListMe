@@ -14,7 +14,6 @@ body {
 .containerTwo {
     padding: 30px;
 }
-
 /*------------------------------------------------------*/
 .topHeader {
     /* border: 1px solid black; */
@@ -32,11 +31,14 @@ body {
 }
 .headerButtons {
     padding: 20px;
+    display: grid;
     grid-template-columns: 50px 50px;
     color: black;
+    text-align: center;
 }
 .header, .headerButtons, .topHeader {
     background-color: #9333ea;
+    color: white;
 }
 .addList:hover {
     background-color: #c4b5fd;
@@ -48,7 +50,7 @@ body {
 .home:hover, .menu:hover {
     background-color: #c4b5fd;
     border-radius: 200px;
-    padding: 5px;
+    /* padding: 10px; */
     transition: 0.2s;
     border: 5px solid rgb(255, 255, 255);
 }
@@ -65,6 +67,7 @@ body {
 .mainHeading {
     font-size: 46px;
     padding: 20px;
+    color: #3f3f46;
 }
 /*------------------------------------------------------*/
 .sideNav {
@@ -84,7 +87,7 @@ body {
     display: grid;
     grid-template-columns: 200px;
     justify-content: center;
-    height: 100vh;
+    height: 120vh;
 }
 /* Add menu bar functionality here */
 .ulSideNav, .liSideNav {
