@@ -5,6 +5,17 @@ export function toggleModal() {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('show-modal');
 }
+export function toggleProjectModal(){
+    const modal = document.querySelector('.projectModal');
+    modal.classList.toggle('show-projectModal');
+}
+export function windowOnClickProject(event) {
+    const modal = document.querySelector('.projectModal-content');
+
+    if (event.target === modal) {
+        toggleProjectModal();
+    }
+}
 export function windowOnClick(event) {
     const modal = document.querySelector('.modal');
     const addButton = document.querySelector('.submit');

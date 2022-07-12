@@ -1,5 +1,5 @@
 import { printOriginalArray, printPrioritizeTasks, printTodayArray } from "./displayTasks";
-
+import { windowOnClickProject, toggleProjectModal } from "./taskFunctions";
 // --------------------------------------------------
 // HOME PAGE
 export function createHomePage() {
@@ -24,6 +24,7 @@ export function createTodayPage() {
 // --------------------------------------------------
 // PROJECT PAGE - STILL NEED TO WORK ON THIS
 export function createProjectPage() {
+    
     const mainHeading = document.querySelector('.mainHeading');
     mainHeading.textContent = 'Projects';
     const mainBody = document.querySelector('.mainBody');
@@ -37,6 +38,30 @@ export function createProjectPage() {
     projectHeading.textContent = 'Formulate Code Project';
     projectContainer.appendChild(projectHeading);
 
+    const projectModal = document.createElement('div');
+    projectModal.classList.add('projectModal');
+    projectModal.innerHTML = `
+        <div class="projectModal-content">
+            <span class="close-button">&times;</span>
+            <h2>Formulate Code Project</h2>
+            <p>Tasks to be completed:</p>
+            <div class="projectItem">
+                <label for="task1">Task 1</label>
+                <input type="checkbox" id="task1" name="task1" value="task1">
+            </div>
+            <div class="projectItem">
+                <label for="task2">Task 2</label>
+                <input type="checkbox" id="task2" name="task2" value="task2">
+            </div>
+        </div>
+        `;
+    projectContainer.appendChild(projectModal);
+
+    projectContainer.addEventListener('click', () => {
+        console.log("Opening Project")
+        toggleProjectModal();
+    })
+    window.addEventListener('click', windowOnClickProject);
 
 }
 // --------------------------------------------------
