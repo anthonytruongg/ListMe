@@ -125,16 +125,3 @@ input, select, textarea {
     white-space: pre-wrap;
     word-break: break-word;
 }
-/* This is code for when a task is actively opened */
-/* .itemActive {
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    margin: 40px;
-    margin-bottom: 10px;
-
-    background-color: #cbd5e1;
-    font-size: 36px;
-    padding: 20px;
-
-    display: none;
-} */

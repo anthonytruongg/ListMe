@@ -87,7 +87,7 @@ body {
     display: grid;
     grid-template-columns: 200px;
     justify-content: center;
-    height: 120vh;
+    height: 130vh;
 }
 /* Add menu bar functionality here */
 .ulSideNav, .liSideNav {
