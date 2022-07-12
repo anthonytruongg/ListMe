@@ -44,7 +44,16 @@
                         </li>
                         <li class="liModal">
                             <label for="description">Description:</label>
-                            <textarea name="description" id="description" cols="40" rows="20"></textarea>
+                            <textarea name="description" id="description" cols="40" rows="0"></textarea>
+                        </li>
+                        <li class="liModal">
+                            <label for="project">Project:</label>
+                            <select id="project" name="project">
+                                <option value="1">Project 1</option>
+                                <option value="2">Project 2</option>
+                                <option value="3">Project 3</option>
+                                <option value="4">Project 4</option>
+                            </select>
                         </li>
                         <li class="liModal">
                             <label for="priority">Priority:</label>
@@ -94,10 +103,33 @@
         <div class="containerTwo">
             <h1 class="mainHeading">My To Do List</h1>
             <div class="mainBody">
+               
+            </div>
+        </div>
+        
+
+        <div class="projectModal">
+            <div class="projectModal-content">
+                <span class="close-button">&times;</span>
+                <h2>Formulate Code Project</h2>
+                <p>Tasks to be completed:</p>
+                <div class="projectItem">
+                    <h3>Task 1</h3>
+                </div>
+                <div class="projectItem">
+                    <h3>Task 2</h3>
+                </div>
+                <div class="projectItem">
+                    <h3>Task 3</h3>
+                </div>
+                <div class="projectItem">
+                    <h3>Task 4</h3>
+                </div>
             </div>
         </div>
         
     </div>
+
 
 
     <script src="main.js" defer></script>
