@@ -5,13 +5,14 @@ import {
     createTask,
     toggleNav, 
     removeTask,
-} from './toggleForm';
+} from './taskFunctions';
 
 import {
     createInboxPage, 
     createHomePage,
     createTodayPage,
     createProjectPage,
+    createPriorityPage,
 } from './switchingTabs';
 
 import clearContents from './clearContents';
@@ -28,7 +29,15 @@ function DOMevents() {
     // -------------------------------------------
     // CREATING A TASK BOX
     const addButton = document.querySelector('.submit');
-    addButton.addEventListener('click', createTask);
+    addButton.addEventListener('click', function(e) {
+        if (document.getElementById('date').value === '') {
+            alert('Please enter a date')
+        } else {
+        createTask(e);
+        }
+    });
+
+       
     // -------------------------------------------
     // REMOVING TASKS
     document.addEventListener('click', function(e) {
@@ -70,6 +79,13 @@ function DOMevents() {
     projects.addEventListener('click', () => {
         clearContents();
         createProjectPage();
+    });
+    // -------------------------------------------
+    // CREATING PRIORITY PAGE
+    const priority = document.getElementById('priorityNav');
+    priority.addEventListener('click', () => {
+        clearContents();
+        createPriorityPage();
     });
 
 

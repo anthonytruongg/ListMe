@@ -5,7 +5,6 @@ export function toggleModal() {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('show-modal');
 }
-
 export function windowOnClick(event) {
     const modal = document.querySelector('.modal');
     const addButton = document.querySelector('.submit');
@@ -21,9 +20,12 @@ export const taskArray = [
     new task('Task 3', 'This is a task', '2022-07-12', '3'),
     new task('Task 4', 'This is a task', '2022-07-11', '4'),
 ];
-
+// creating a task
 export function createTask(e) {
-    
+    if (document.getElementById('date').value === '') {
+        alert('Please enter a date')
+    }
+        
     e.preventDefault();
     
     const newTask = new task(
@@ -37,17 +39,16 @@ export function createTask(e) {
 
     // KEEPING TRACK OF ARRAY
     console.log(taskArray);
-
+    // Creating a new task div
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('item');
-
     const taskTitle = document.createElement('h1');
     const taskDate = document.createElement('p');
     const taskDescription = document.createElement('p');
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete');
 
-
+    // Setting attributes to the task div
     taskArray.forEach(task => {
         taskDiv.setAttribute('id', task.id);
         taskTitle.textContent = task.title;
@@ -62,7 +63,6 @@ export function createTask(e) {
         const dateFormat = format(parseISO(task.date), 'MM/dd/yyyy');
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
-        
 
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';

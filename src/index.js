@@ -1,5 +1,5 @@
 import DOMevents from './addTask';
-import { printOriginalArray, printTask } from './displayTasks';
+import { printOriginalArray } from './displayTasks';
 
 // printing temp task to organize
 printOriginalArray();
