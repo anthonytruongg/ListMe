@@ -23,21 +23,23 @@ export function createTodayPage() {
 }
 // --------------------------------------------------
 // PROJECT PAGE - STILL NEED TO WORK ON THIS
+// NEED TO ADD FUNCTIONALITY TO ADD PROJECTS
 export function createProjectPage() {
     
     const mainHeading = document.querySelector('.mainHeading');
     mainHeading.textContent = 'Projects';
     const mainBody = document.querySelector('.mainBody');
 
-
+    // -------------------------------------------
+    // THIS IS THE PROJECT ITEM
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('projectContainer');
     mainBody.appendChild(projectContainer);
-
+    // THIS IS THE NAME OF THE PROJECT
     const projectHeading = document.createElement('h2');
     projectHeading.textContent = 'Formulate Code Project';
     projectContainer.appendChild(projectHeading);
-
+    // THIS IS THE DETAILS + TASKS OF THE PROJECT
     const projectModal = document.createElement('div');
     projectModal.classList.add('projectModal');
     projectModal.innerHTML = `
@@ -46,21 +48,23 @@ export function createProjectPage() {
             <h2>Formulate Code Project</h2>
             <p>Tasks to be completed:</p>
             <div class="projectItem">
-                <label for="task1">Task 1</label>
-                <input type="checkbox" id="task1" name="task1" value="task1">
+                <h3>Task 1</h3>
             </div>
             <div class="projectItem">
-                <label for="task2">Task 2</label>
-                <input type="checkbox" id="task2" name="task2" value="task2">
+                <h3>Task 2</h3>
+            </div>
+            <div class="projectItem">
+                <h3>Task 3</h3>
+            </div>
+            <div class="projectItem">
+                <h3>Task 4</h3>
             </div>
         </div>
+        
         `;
-    projectContainer.appendChild(projectModal);
+    mainBody.appendChild(projectModal);
 
-    projectContainer.addEventListener('click', () => {
-        console.log("Opening Project")
-        toggleProjectModal();
-    })
+    projectContainer.addEventListener('click', toggleProjectModal);
     window.addEventListener('click', windowOnClickProject);
 
 }

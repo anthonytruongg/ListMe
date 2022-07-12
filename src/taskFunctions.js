@@ -10,8 +10,7 @@ export function toggleProjectModal(){
     modal.classList.toggle('show-projectModal');
 }
 export function windowOnClickProject(event) {
-    const modal = document.querySelector('.projectModal-content');
-
+    const modal = document.querySelector('.projectModal');
     if (event.target === modal) {
         toggleProjectModal();
     }
