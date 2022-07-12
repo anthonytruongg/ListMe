@@ -1,5 +1,5 @@
 import { printOriginalArray, printPrioritizeTasks, printTodayArray } from "./displayTasks";
-import { windowOnClickProject, toggleProjectModal } from "./taskFunctions";
+import { windowOnClickProject, toggleProjectModal, toggleAddProjectModal } from "./taskFunctions";
 // --------------------------------------------------
 // HOME PAGE
 export function createHomePage() {
@@ -29,7 +29,10 @@ export function createProjectPage() {
     const mainHeading = document.querySelector('.mainHeading');
     mainHeading.textContent = 'Projects';
     const mainBody = document.querySelector('.mainBody');
-
+    const addProject = document.createElement('div');
+    addProject.classList.add('addProject');
+    addProject.textContent = 'Click to add a Project!';
+    mainBody.appendChild(addProject);
 
     // -------------------------------------------
     // THIS IS THE PROJECT ITEM
@@ -41,8 +44,13 @@ export function createProjectPage() {
     projectHeading.textContent = 'Formulate Code Project';
     projectContainer.appendChild(projectHeading);
     // THIS IS THE DETAILS + TASKS OF THE PROJECT
-    
 
+    addProject.addEventListener('click', () => {
+        console.log("PROJECT MODAL OPEN")
+        toggleAddProjectModal();
+    });
+    
+    // -------------------------------------------
     projectContainer.addEventListener('click', toggleProjectModal);
     window.addEventListener('click', windowOnClickProject);
 

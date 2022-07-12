@@ -1,6 +1,7 @@
 import task from "./taskDetails";
 import { format, parseISO } from "date-fns";
-
+// --------------------------------------------------
+// Modal Toggle Functions
 export function toggleModal() {
     const modal = document.querySelector('.modal');
     modal.classList.toggle('show-modal');
@@ -9,10 +10,21 @@ export function toggleProjectModal(){
     const modal = document.querySelector('.projectModal');
     modal.classList.toggle('show-projectModal');
 }
+export function toggleAddProjectModal() {
+    const modal = document.querySelector('.addProjectModal');
+    modal.classList.toggle('show-addProjectModal');
+}
+// --------------------------------------------------
+// Window click events
+
 export function windowOnClickProject(event) {
     const modal = document.querySelector('.projectModal');
+    const modalTwo = document.querySelector('.addProjectModal');
     if (event.target === modal) {
         toggleProjectModal();
+    }
+    if (event.target === modalTwo) {
+        toggleAddProjectModal();
     }
 }
 export function windowOnClick(event) {
@@ -23,6 +35,8 @@ export function windowOnClick(event) {
         toggleModal();
     }
 }
+// --------------------------------------------------
+// Array (currently contains sample tasks)
 const mainBody = document.querySelector('.mainBody');
 export const taskArray = [ 
     new task('Task 1', 'This is a task', '2022-08-04', '1'),
@@ -30,7 +44,8 @@ export const taskArray = [
     new task('Task 3', 'This is a task', '2022-07-12', '3'),
     new task('Task 4', 'This is a task', '2022-07-11', '4'),
 ];
-// creating a task
+// --------------------------------------------------
+// Create Task Functions
 export function createTask(e) {
     if (document.getElementById('date').value === '') {
         alert('Please enter a date')
@@ -88,11 +103,13 @@ export function createTask(e) {
     document.getElementById("taskForm").reset();
 }
 
+
+// --------------------------------------------------
+// Removing Task Functions + Toggle Nav Bar
 export function toggleNav() {
     const sideNav = document.querySelector('.sideNav');
     sideNav.classList.toggle('sideNav-open');
 }
-
 export function removeTask(e) {
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);

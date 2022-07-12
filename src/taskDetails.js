@@ -1,5 +1,3 @@
-import { isThisSecond } from "date-fns";
-
 export default class task {
     constructor(title, description, date, priority, project) {
         this.id = getID();
