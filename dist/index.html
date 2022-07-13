@@ -48,11 +48,7 @@
                         </li>
                         <li class="liModal">
                             <label for="project">Project:</label>
-                            <select id="project" name="project">
-                                <option value="1">Project 1</option>
-                                <option value="2">Project 2</option>
-                                <option value="3">Project 3</option>
-                                <option value="4">Project 4</option>
+                            <select id="projectOption" name="project">
                             </select>
                         </li>
                         <li class="liModal">
@@ -110,7 +106,7 @@
         <div class="projectModal">
             <div class="projectModal-content">
                 <h1 class="mainHeading">Formulate Code Project</h1>
-                <h2></h2>
+                <h2 class="projectDate">Due Date: 07/12</h2>
                 <div class="projectItem">
                     <h3>Write code</h3>
                 </div>
@@ -126,18 +122,18 @@
         <div class="addProjectModal">
             <div class="addProjectModal-content">
                 <span class="close-button">&times;</span>
-                <form action="projectForm">
+                <form id="projectForm">
                     <ul class="ulModal">
                         <li class="liModal">
                             <label for="projectName">Project Name:</label>
                             <input id="projectName" type="text" placeholder="Project Name" required>
                         </li>
                         <li class="liModal">
-                            <label for="projectDescription">Project Description:</label>
-                            <textarea name="projectDescription" id="projectDescription" cols="40" rows="0"></textarea>
+                            <label for="projectDate">Due Date:</label>
+                            <input id="projectDueDate"type="date" required>
                         </li>
                         <li class="liModal">
-                            <button class="submit">Add</button>
+                            <button class="submitProject">Add</button>
                         </li>
                     </ul>
                 </form>

@@ -1,4 +1,4 @@
-export default class task {
+export class task {
     constructor(title, description, date, priority, project) {
         this.id = getID();
         this.title = title;
@@ -6,6 +6,13 @@ export default class task {
         this.date = date;
         this.priority = priority;
         this.project = project;
+    }
+}
+export class project {
+    constructor(name, date) {
+        this.id = getID();
+        this.name = name;
+        this.date = date;
     }
 }
 

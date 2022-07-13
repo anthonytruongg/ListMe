@@ -1,4 +1,4 @@
-import { taskArray } from "./taskFunctions";
+import { taskArray, projectArray } from "./taskFunctions";
 import { format, parseISO } from "date-fns";
 
 // --------------------------------------------------
@@ -82,6 +82,11 @@ export function printOriginalArray() {
         const dateFormat = format(parseISO(task.date), 'MM/dd/yyyy');
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
+
+        const taskProject = document.createElement('p');
+        taskProject.textContent = 'Project: ' + task.project;
+        taskDiv.appendChild(taskProject);
+        
         
     
         if (task.priority === "4") {
@@ -149,5 +154,39 @@ export function printPrioritizeTasks() {
             taskDiv.style.backgroundColor = '#38bdf8';
         }
         mainBody.appendChild(taskDiv);
+    })
+}
+// --------------------------------------------------
+// This function prints the project array
+export function printProjectArray() {
+    const mainBody = document.querySelector('.mainBody');
+    const projectOption = document.getElementById('projectOption');
+    projectArray.forEach(project => {
+        
+        const projectContainer = document.createElement('div');
+        projectContainer.classList.add('projectContainer');
+
+        const projectHeading = document.createElement('h2');
+        const projectDueDate = document.createElement('h3')
+
+        const option = document.createElement('option');
+        option.textContent = project.name;
+        projectOption.appendChild(option);
+
+        projectContainer.setAttribute('id', project.id);
+        projectHeading.textContent = project.name;
+        projectContainer.appendChild(projectHeading);
+
+        const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+        projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
+        projectContainer.appendChild(projectDueDate);
+
+        projectContainer.addEventListener('click', () => {
+            console.log("Clicking project" + project.id)
+
+        })
+
+
+        mainBody.appendChild(projectContainer);
     })
 }

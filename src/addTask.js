@@ -5,6 +5,8 @@ import {
     createTask,
     toggleNav, 
     removeTask,
+    createProject,
+    toggleAddProjectModal,
 } from './taskFunctions';
 
 import {
@@ -36,6 +38,20 @@ function DOMevents() {
         createTask(e);
         }
     });
+    // -------------------------------------------
+    // CREATING A PROJECT BOX
+    const submitButton = document.querySelector('.submitProject');
+    submitButton.addEventListener('click', function(e) {
+        if (document.getElementById('projectName').value === '') {
+            alert('Please enter a title')
+        } else if (document.getElementById('projectDueDate').value === '') {
+            alert('Please enter a due date')
+        } else {
+            toggleAddProjectModal();
+            createProject(e);
+        }
+    });
+
 
        
     // -------------------------------------------

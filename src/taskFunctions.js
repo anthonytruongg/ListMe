@@ -1,4 +1,4 @@
-import task from "./taskDetails";
+import { task, project } from "./taskDetails";
 import { format, parseISO } from "date-fns";
 // --------------------------------------------------
 // Modal Toggle Functions
@@ -44,20 +44,22 @@ export const taskArray = [
     new task('Task 3', 'This is a task', '2022-07-12', '3'),
     new task('Task 4', 'This is a task', '2022-07-11', '4'),
 ];
+
+export const projectArray = [
+    new project('Project 1', '2022-08-04'),
+    new project('Project 2', '2022-07-23'),
+    new project('Project 3', '2022-07-12'),
+];
 // --------------------------------------------------
 // Create Task Functions
 export function createTask(e) {
-    if (document.getElementById('date').value === '') {
-        alert('Please enter a date')
-    }
-        
     e.preventDefault();
     
     const newTask = new task(
         document.getElementById('title').value,
         document.getElementById('description').value,
         document.getElementById('date').value,
-        document.getElementById('priority').value
+        document.getElementById('priority').value,
     );
     
     taskArray.push(newTask);
@@ -89,6 +91,10 @@ export function createTask(e) {
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
 
+        const taskProject = document.createElement('p');
+        taskProject.textContent = 'Project: ' + task.project;
+        taskDiv.appendChild(taskProject);
+
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';
         } else if (task.priority === "3") {
@@ -101,6 +107,44 @@ export function createTask(e) {
         mainBody.appendChild(taskDiv);
     })
     document.getElementById("taskForm").reset();
+}
+// --------------------------------------------------
+// Creating Project
+export function createProject(e) {
+    const projectOption = document.getElementById("projectOption")
+
+    e.preventDefault();
+
+    const newProject = new project(
+        document.getElementById('projectName').value,
+        document.getElementById('projectDueDate').value,
+    );
+
+    projectArray.push(newProject);
+    console.log(projectArray);
+
+    const projectContainer = document.createElement('div');
+    projectContainer.classList.add('projectContainer');
+
+    const projectHeading = document.createElement('h2');
+    const projectDueDate = document.createElement('h3')
+
+    projectArray.forEach(project => {
+        const option = document.createElement('option');
+        option.textContent = project.name;
+        projectOption.appendChild(option);
+
+        projectContainer.setAttribute('id', project.id);
+        projectHeading.textContent = project.name;
+        projectContainer.appendChild(projectHeading);
+
+        const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+        projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
+        projectContainer.appendChild(projectDueDate);
+
+        mainBody.appendChild(projectContainer);
+    })
+    document.getElementById("projectForm").reset();
 }
 
 
