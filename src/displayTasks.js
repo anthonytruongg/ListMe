@@ -11,8 +11,8 @@ export function printTodayArray() {
         return task.date === todayDate;
     })
     const mainBody = document.querySelector('.mainBody');
-    const taskDiv = document.createElement('div');
-    taskDiv.classList.add('item');
+    // const taskDiv = document.createElement('div');
+    // taskDiv.classList.add('item');
 
     filteredDateArray.forEach(task => {
         const taskDiv = document.createElement('div');
@@ -114,8 +114,8 @@ export function printPrioritizeTasks() {
 
     console.log("PRINTING FILTERED TASKS")
     const mainBody = document.querySelector('.mainBody');
-    const taskDiv = document.createElement('div');
-    taskDiv.classList.add('item');
+    // const taskDiv = document.createElement('div');
+    // taskDiv.classList.add('item');
 
     filteredPriorityArray.forEach(task => {
         const taskDiv = document.createElement('div');
@@ -170,10 +170,10 @@ export function printProjectArray() {
         const projectDueDate = document.createElement('h3')
 
         // creates project values for tasks
-        const option = document.createElement('option');
-        option.value = project.id;
-        option.textContent = project.name;
-        projectOption.appendChild(option);
+        // const option = document.createElement('option');
+        // option.value = project.id;
+        // option.textContent = project.name;
+        // projectOption.appendChild(option);
 
         projectContainer.setAttribute('id', project.id);
         projectHeading.textContent = project.name;

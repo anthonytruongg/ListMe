@@ -46,9 +46,9 @@ export const taskArray = [
 ];
 
 export const projectArray = [
-    new project('Project 1', '2022-08-04'),
-    new project('Project 2', '2022-07-23'),
-    new project('Project 3', '2022-07-12'),
+    // new project('Project 1', '2022-08-04'),
+    // new project('Project 2', '2022-07-23'),
+    // new project('Project 3', '2022-07-12'),
 ];
 // --------------------------------------------------
 // Create Task Functions
@@ -60,6 +60,7 @@ export function createTask(e) {
         document.getElementById('description').value,
         document.getElementById('date').value,
         document.getElementById('priority').value,
+        document.getElementById('projectOption').value
     );
     
     taskArray.push(newTask);
