@@ -1,4 +1,4 @@
-import { taskArray, projectArray } from "./taskFunctions";
+import { taskArray, projectArray, toggleProjectModal, viewProjectTasks } from "./taskFunctions";
 import { format, parseISO } from "date-fns";
 
 // --------------------------------------------------
@@ -86,7 +86,7 @@ export function printOriginalArray() {
         const taskProject = document.createElement('p');
         taskProject.textContent = 'Project: ' + task.project;
         taskDiv.appendChild(taskProject);
-        
+
         
     
         if (task.priority === "4") {
@@ -169,7 +169,9 @@ export function printProjectArray() {
         const projectHeading = document.createElement('h2');
         const projectDueDate = document.createElement('h3')
 
+        // creates project values for tasks
         const option = document.createElement('option');
+        option.value = project.id;
         option.textContent = project.name;
         projectOption.appendChild(option);
 
@@ -181,10 +183,12 @@ export function printProjectArray() {
         projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
         projectContainer.appendChild(projectDueDate);
 
-        projectContainer.addEventListener('click', () => {
-            console.log("Clicking project" + project.id)
-
-        })
+        // testing to see if clicking projects will open
+        // projectContainer.addEventListener('click', () => {
+        //     console.log("Clicking project" + project.id)
+        //     toggleProjectModal(project.id)
+        //     // viewProjectTasks(project.id)
+        // })
 
 
         mainBody.appendChild(projectContainer);

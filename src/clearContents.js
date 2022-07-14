@@ -1,4 +1,4 @@
-function clearContents() {
+export function clearContents() {
     // const containerTwo = document.querySelector('.containerTwo');
     // containerTwo.innerHTML = '';
     
@@ -14,4 +14,7 @@ function clearContents() {
     console.log("Clearing Contents of MainBody")
 }
 
-export default clearContents;
+export function clearProjectContents() {
+    const projectModalContent = document.querySelector('.projectModal-content');
+    projectModalContent.innerHTML = '';
+}

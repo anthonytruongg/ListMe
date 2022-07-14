@@ -7,6 +7,8 @@ import {
     removeTask,
     createProject,
     toggleAddProjectModal,
+    toggleProjectModal,
+    viewProjectTasks,
 } from './taskFunctions';
 
 import {
@@ -17,7 +19,10 @@ import {
     createPriorityPage,
 } from './switchingTabs';
 
-import clearContents from './clearContents';
+import { clearContents, clearProjectContents } from './clearContents';
+
+import { projectArray } from './taskFunctions';
+import { format, parseISO } from "date-fns";
 
 
 function DOMevents() {
@@ -47,12 +52,36 @@ function DOMevents() {
         } else if (document.getElementById('projectDueDate').value === '') {
             alert('Please enter a due date')
         } else {
-            toggleAddProjectModal();
             createProject(e);
+            toggleAddProjectModal();
         }
     });
+    // -------------------------------------------
+    // VIEWING PROJECTS
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('projectContainer')){
+            projectArray.forEach(project => {
+                if (e.target.id === project.id) {
+                    clearProjectContents();
+                    toggleProjectModal();
+                    console.log("Clicking project" + project.id)
+                    const projectModalContent = document.querySelector('.projectModal-content');
 
+                    const projectHeading = document.createElement('h1');
+                    projectHeading.setAttribute('class', 'mainHeading');
+                    projectModalContent.appendChild(projectHeading);
+                    const projectDate = document.createElement('h2');
+                    projectDate.setAttribute('class', 'projectDate');
+                    projectModalContent.appendChild(projectDate);
 
+                
+                    projectHeading.textContent = project.name;
+                    const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+                    projectDate.textContent = 'Due Date: ' + projectDateFormat;
+                }
+        })
+        }
+    });
        
     // -------------------------------------------
     // REMOVING TASKS

@@ -72,6 +72,7 @@ export function createTask(e) {
     const taskTitle = document.createElement('h1');
     const taskDate = document.createElement('p');
     const taskDescription = document.createElement('p');
+    const taskProject = document.createElement('p');
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete');
 
@@ -91,7 +92,6 @@ export function createTask(e) {
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);
 
-        const taskProject = document.createElement('p');
         taskProject.textContent = 'Project: ' + task.project;
         taskDiv.appendChild(taskProject);
 
@@ -128,9 +128,9 @@ export function createProject(e) {
 
     const projectHeading = document.createElement('h2');
     const projectDueDate = document.createElement('h3')
+    const option = document.createElement('option');
 
     projectArray.forEach(project => {
-        const option = document.createElement('option');
         option.textContent = project.name;
         projectOption.appendChild(option);
 
@@ -146,6 +146,8 @@ export function createProject(e) {
     })
     document.getElementById("projectForm").reset();
 }
+// --------------------------------------------------
+// Viewing Project Tasks
 
 
 // --------------------------------------------------
