@@ -2,6 +2,16 @@ import { taskArray, projectArray, toggleProjectModal } from "./taskFunctions";
 import { format, parseISO } from "date-fns";
 import { clearProjectContents } from "./clearContents";
 
+
+// --------------------------------------------------
+// IMPORTING DATA FROM LOCAL STORAGE TO BE CREATED
+// if (taskArray.length === 0) {
+//     console.log("EMPTY")
+// } else {
+//     let retrieveData = JSON.parse(localStorage.getItem('newTask'));
+//     taskArray.push(retrieveData)
+// }
+
 // --------------------------------------------------
 // This function reorganizes the tasks by 
 // cloning the array and sorting it by date
@@ -55,7 +65,12 @@ export function printTodayArray() {
 export function printOriginalArray() {
     console.log("PRINTING ORIGINAL ARRAY")
     const mainBody = document.querySelector('.mainBody');
-
+    // --------------------------------------------------
+    // IMPORTING DATA FROM LOCAL STORAGE TO BE CREATED
+        // let retrieveData = JSON.parse(localStorage.getItem('newTask'));
+        // console.log("PUSHING DATA",retrieveData)
+        // taskArray.push(retrieveData)
+    // --------------------------------------------------
     taskArray.forEach(task => {
         const taskDiv = document.createElement('div');
         taskDiv.classList.add('item');
@@ -75,7 +90,7 @@ export function printOriginalArray() {
         
         taskDescription.textContent = 'Details: ' + task.description;
         taskDiv.appendChild(taskDescription);
-    
+        
         const dateFormat = format(parseISO(task.date), 'MM/dd/yyyy');
         taskDate.textContent = 'Due Date: ' + dateFormat;
         taskDiv.appendChild(taskDate);

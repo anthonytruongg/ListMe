@@ -38,12 +38,18 @@ export function windowOnClick(event) {
 // --------------------------------------------------
 // Array (currently contains sample tasks)
 const mainBody = document.querySelector('.mainBody');
+const storedTaskArray = JSON.parse(localStorage.getItem('allEntries'));
+
+
 export const taskArray = [];
 
 export const projectArray = [];
+
 // --------------------------------------------------
 // Create Task Functions
 export function createTask(e) {
+    const storedTaskArray = JSON.parse(localStorage.getItem('allEntries'));
+
     e.preventDefault();
     const newTask = new task(
         document.getElementById('title').value,
@@ -52,6 +58,14 @@ export function createTask(e) {
         document.getElementById('priority').value,
         document.getElementById('projectOption').value
     );
+    // --------------------------------------------------
+    // STORING DATA TO LOCAL STORAGE ARRAY
+    localStorage.setItem('newTask', JSON.stringify(newTask));
+    storedTaskArray.push(newTask);
+    localStorage.setItem('allEntries', JSON.stringify(storedTaskArray));
+    // --------------------------------------------------
+    console.log("STORING DATA TO LOCAL STORAGE");
+    //-----------------------------------------------------
     taskArray.push(newTask);
     // Creating a new task div
     const taskDiv = document.createElement('div');
@@ -149,6 +163,9 @@ export function removeTask(e) {
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
     deleteTask(e.target.parentNode.id);
+    // RESETTING LOCAL STORAGE
+    localStorage.setItem("taskArray", JSON.stringify(taskArray));
+
 }
 // --------------------------------------------------
 // REMOVING PROJECTS
