@@ -5,11 +5,12 @@ import {
     createTask,
     toggleNav, 
     removeTask,
+    removeProject,
     createProject,
     toggleAddProjectModal,
     toggleProjectModal,
-    viewProjectTasks,
     taskArray,
+    removeProjectOption,
 } from './taskFunctions';
 
 import {
@@ -24,6 +25,8 @@ import { clearContents, clearProjectContents } from './clearContents';
 
 import { projectArray } from './taskFunctions';
 import { format, parseISO } from "date-fns";
+import { viewProjectTasks } from './displayTasks';
+import { project } from './taskDetails';
 
 
 function DOMevents() {
@@ -61,60 +64,68 @@ function DOMevents() {
     // VIEWING PROJECTS
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('projectContainer')){
-            projectArray.forEach(project => {
-                if (e.target.id === project.id) {
-                    clearProjectContents();
-                    toggleProjectModal();
-                    console.log("Clicking project" + project.id)
-                    const projectModalContent = document.querySelector('.projectModal-content');
+            viewProjectTasks(e);
+        }
+    })
+    //         projectArray.forEach(project => {
+    //             if (e.target.id === project.id) {
+    //                 clearProjectContents();
+    //                 toggleProjectModal();
+    //                 console.log("Clicking project" + project.id)
+    //                 const projectModalContent = document.querySelector('.projectModal-content');
 
-                    const projectHeading = document.createElement('h1');
-                    projectHeading.setAttribute('class', 'mainHeading');
-                    projectModalContent.appendChild(projectHeading);
-                    const projectDate = document.createElement('h2');
-                    projectDate.setAttribute('class', 'projectDate');
-                    projectModalContent.appendChild(projectDate);
+    //                 const projectHeading = document.createElement('h1');
+    //                 projectHeading.setAttribute('class', 'mainHeading');
+    //                 projectModalContent.appendChild(projectHeading);
+    //                 const projectDate = document.createElement('h2');
+    //                 projectDate.setAttribute('class', 'projectDate');
+    //                 projectModalContent.appendChild(projectDate);
 
-                    taskArray.forEach(task => {
-                        if (task.project === project.name) {
-                            const projectItem = document.createElement('div');
-                            projectItem.classList.add('projectItem');
-                            projectItem.setAttribute('id', task.id);
+    //                 taskArray.forEach(task => {
+    //                     if (task.project === project.name) {
+    //                         const projectItem = document.createElement('div');
+    //                         projectItem.classList.add('projectItem');
+    //                         projectItem.setAttribute('id', task.id);
 
-                            const projectTaskTitle = document.createElement('p');
-                            projectTaskTitle.setAttribute('class', 'projectTaskTitle');
-                            projectTaskTitle.textContent = task.title;
-                            projectItem.appendChild(projectTaskTitle);
+    //                         const projectTaskTitle = document.createElement('p');
+    //                         projectTaskTitle.setAttribute('class', 'projectTaskTitle');
+    //                         projectTaskTitle.textContent = task.title;
+    //                         projectItem.appendChild(projectTaskTitle);
 
-                            const projectItemDescription = document.createElement('p');
-                            projectItemDescription.setAttribute('class', 'projectDescription');
-                            projectItemDescription.textContent = task.description;
-                            projectItem.appendChild(projectItemDescription);
+    //                         const projectItemDescription = document.createElement('p');
+    //                         projectItemDescription.setAttribute('class', 'projectDescription');
+    //                         projectItemDescription.textContent = task.description;
+    //                         projectItem.appendChild(projectItemDescription);
 
-                            if (task.priority === "4") {
-                                projectItem.style.backgroundColor = '#f87171';
-                            } else if (task.priority === "3") {
-                                projectItem.style.backgroundColor = '#facc15';
-                            } else if (task.priority === "2") {
-                                projectItem.style.backgroundColor = '#34d399';
-                            } else if (task.priority === "1") {
-                                projectItem.style.backgroundColor = '#38bdf8';
-                            }
+    //                         const deleteButton = document.createElement('button');
+    //                         deleteButton.classList.add('delete');
+    //                         deleteButton.textContent = '-';
+    //                         projectItem.appendChild(deleteButton);
 
-                            projectModalContent.appendChild(projectItem);
+    //                         if (task.priority === "4") {
+    //                             projectItem.style.backgroundColor = '#f87171';
+    //                         } else if (task.priority === "3") {
+    //                             projectItem.style.backgroundColor = '#facc15';
+    //                         } else if (task.priority === "2") {
+    //                             projectItem.style.backgroundColor = '#34d399';
+    //                         } else if (task.priority === "1") {
+    //                             projectItem.style.backgroundColor = '#38bdf8';
+    //                         }
 
-                        }
-                    })
+    //                         projectModalContent.appendChild(projectItem);
+
+    //                     }
+    //                 })
 
 
                 
-                    projectHeading.textContent = project.name;
-                    const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
-                    projectDate.textContent = 'Due Date: ' + projectDateFormat;
-                }
-        })
-        }
-    });
+    //                 projectHeading.textContent = project.name;
+    //                 const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+    //                 projectDate.textContent = 'Due Date: ' + projectDateFormat;
+    //             }
+    //     })
+    //     }
+    // });
        
     // -------------------------------------------
     // REMOVING TASKS
@@ -126,6 +137,18 @@ function DOMevents() {
             theTask.remove();
         }
     });
+    // -------------------------------------------
+    // REMOVING PROJECTS
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('deleteProject')) {
+            removeProjectOption(e);
+            removeProject(e);
+            let theButton = e.target;
+            let theProject = theButton.parentNode;
+            theProject.remove();
+        } 
+    });
+
     // -------------------------------------------
     // TOGGLING SIDE NAV BAR
     const menu = document.querySelector('.menuButton');

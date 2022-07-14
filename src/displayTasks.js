@@ -1,5 +1,6 @@
-import { taskArray, projectArray, toggleProjectModal, viewProjectTasks } from "./taskFunctions";
+import { taskArray, projectArray, toggleProjectModal } from "./taskFunctions";
 import { format, parseISO } from "date-fns";
+import { clearProjectContents } from "./clearContents";
 
 // --------------------------------------------------
 // This function reorganizes the tasks by 
@@ -168,6 +169,11 @@ export function printProjectArray() {
 
         const projectHeading = document.createElement('h2');
         const projectDueDate = document.createElement('h3')
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('deleteProject');
+        deleteButton.textContent = 'X';
+        projectContainer.appendChild(deleteButton);
 
         // creates project values for tasks
         // const option = document.createElement('option');
@@ -194,3 +200,65 @@ export function printProjectArray() {
         mainBody.appendChild(projectContainer);
     })
 }
+// --------------------------------------------------
+// VIEWING PROJECT TASKS
+export function viewProjectTasks(e) {
+projectArray.forEach(project => {
+        if (e.target.id === project.id) {
+            clearProjectContents();
+            toggleProjectModal();
+            console.log("Clicking project" + project.id)
+            const projectModalContent = document.querySelector('.projectModal-content');
+
+            const projectHeading = document.createElement('h1');
+            projectHeading.setAttribute('class', 'mainHeading');
+            projectModalContent.appendChild(projectHeading);
+            const projectDate = document.createElement('h2');
+            projectDate.setAttribute('class', 'projectModalDate');
+            projectModalContent.appendChild(projectDate);
+
+            taskArray.forEach(task => {
+                if (task.project === project.name) {
+                    const projectItem = document.createElement('div');
+                    projectItem.classList.add('projectItem');
+                    projectItem.setAttribute('id', task.id);
+
+                    const projectTaskTitle = document.createElement('p');
+                    projectTaskTitle.setAttribute('class', 'projectTaskTitle');
+                    projectTaskTitle.textContent = task.title;
+                    projectItem.appendChild(projectTaskTitle);
+
+                    const projectItemDescription = document.createElement('p');
+                    projectItemDescription.setAttribute('class', 'projectDescription');
+                    projectItemDescription.textContent = task.description;
+                    projectItem.appendChild(projectItemDescription);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('delete');
+                    deleteButton.textContent = '-';
+                    projectItem.appendChild(deleteButton);
+
+                    if (task.priority === "4") {
+                        projectItem.style.backgroundColor = '#f87171';
+                    } else if (task.priority === "3") {
+                        projectItem.style.backgroundColor = '#facc15';
+                    } else if (task.priority === "2") {
+                        projectItem.style.backgroundColor = '#34d399';
+                    } else if (task.priority === "1") {
+                        projectItem.style.backgroundColor = '#38bdf8';
+                    }
+
+                    projectModalContent.appendChild(projectItem);
+
+                }
+            })
+
+
+        
+            projectHeading.textContent = project.name;
+            const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+            projectDate.textContent = 'Due Date: ' + projectDateFormat;
+        }
+})
+}
+       

@@ -1,5 +1,6 @@
 import { task, project } from "./taskDetails";
 import { format, parseISO } from "date-fns";
+import { clearProjectContents } from "./clearContents";
 // --------------------------------------------------
 // Modal Toggle Functions
 export function toggleModal() {
@@ -130,8 +131,11 @@ export function createProject(e) {
     const projectHeading = document.createElement('h2');
     const projectDueDate = document.createElement('h3')
     const option = document.createElement('option');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('deleteProject');
 
     projectArray.forEach(project => {
+        option.setAttribute('id', project.id);
         option.textContent = project.name;
         projectOption.appendChild(option);
 
@@ -143,24 +147,47 @@ export function createProject(e) {
         projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
         projectContainer.appendChild(projectDueDate);
 
+        deleteButton.textContent = 'X';
+        projectContainer.appendChild(deleteButton);
+
         mainBody.appendChild(projectContainer);
     })
     document.getElementById("projectForm").reset();
 }
-// --------------------------------------------------
-// Viewing Project Tasks
-
 
 // --------------------------------------------------
-// Removing Task Functions + Toggle Nav Bar
+// Toggle Nav Bar
 export function toggleNav() {
     const sideNav = document.querySelector('.sideNav');
     sideNav.classList.toggle('sideNav-open');
 }
+// --------------------------------------------------
+// Delete Task
 export function removeTask(e) {
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
     deleteTask(e.target.parentNode.id);
 
     console.log("REMOVING TASK");
+    console.log(taskArray);
+}
+// --------------------------------------------------
+// REMOVING PROJECTS
+export function removeProject(e) {
+    clearProjectContents();
+    const getProject = (id) => projectArray.find(project => project.id === id);
+    const deleteProject = (id) => projectArray.splice(projectArray.indexOf(getProject(id)), 1);
+    deleteProject(e.target.parentNode.id);
+
+    console.log("REMOVING PROJECT");
+    console.log(projectArray)
+}
+// --------------------------------------------------
+// REMOVING PROJECT OPTIONS FROM DROPDOWN
+export function removeProjectOption(e) {
+    const projectOption = document.getElementById("projectOption")
+    const option = document.querySelector(`option[id="${e.target.parentNode.id}"]`);
+
+    projectOption.removeChild(option);
+    console.log("removing project option");
 }

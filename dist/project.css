@@ -80,16 +80,29 @@
     font-size: 20px;
     color: rgb(45, 41, 41);
     display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
     justify-content: space-between;
     word-wrap: break-word;
     white-space: pre-wrap;
     word-break: break-word;
 }
-h3 {
-    color: white;
+.deleteProject {
+grid-column: 2 / 2;
+grid-row: 1 / 1;
 }
 .projectDate {
+    grid-column: 1 / 2;
+    grid-row: 2 / 2;
+}
+.projectModalDate {
+    grid-column: 2 / 2;
+    grid-row: 1 / 1;
     color: #3f3f46;
+    justify-content: center;
+}
+h3 {
+    color: white;
 }
 .projectTaskTitle {
     font-size: 20px;
