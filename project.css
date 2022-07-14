@@ -77,8 +77,6 @@
     background-color: #a21caf;
     padding: 20px;
     margin: 20px;
-    height: 100px;
-    width: 200px;
     font-size: 20px;
     color: rgb(45, 41, 41);
     display: grid;
@@ -92,6 +90,15 @@ h3 {
 }
 .projectDate {
     color: #3f3f46;
+}
+.projectTaskTitle {
+    font-size: 20px;
+    color: white;
+}
+.projectDescription {
+    font-size: 15px;
+    color: white;
+    
 }
 .projectItem:hover {
     background-color: #3c8df0;
