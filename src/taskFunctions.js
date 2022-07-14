@@ -1,4 +1,4 @@
-import { task, project } from "./taskDetails";
+import { task, project } from "./constructors";
 import { format, parseISO } from "date-fns";
 import { clearProjectContents } from "./clearContents";
 // --------------------------------------------------
@@ -17,7 +17,6 @@ export function toggleAddProjectModal() {
 }
 // --------------------------------------------------
 // Window click events
-
 export function windowOnClickProject(event) {
     const modal = document.querySelector('.projectModal');
     const modalTwo = document.querySelector('.addProjectModal');
@@ -39,23 +38,13 @@ export function windowOnClick(event) {
 // --------------------------------------------------
 // Array (currently contains sample tasks)
 const mainBody = document.querySelector('.mainBody');
-export const taskArray = [ 
-    new task('Task 1', 'This is a task', '2022-08-04', '1'),
-    new task('Task 2', 'This is a task', '2022-07-23', '2'),
-    new task('Task 3', 'This is a task', '2022-07-12', '3'),
-    new task('Task 4', 'This is a task', '2022-07-11', '4'),
-];
+export const taskArray = [];
 
-export const projectArray = [
-    // new project('Project 1', '2022-08-04'),
-    // new project('Project 2', '2022-07-23'),
-    // new project('Project 3', '2022-07-12'),
-];
+export const projectArray = [];
 // --------------------------------------------------
 // Create Task Functions
 export function createTask(e) {
     e.preventDefault();
-    
     const newTask = new task(
         document.getElementById('title').value,
         document.getElementById('description').value,
@@ -63,11 +52,7 @@ export function createTask(e) {
         document.getElementById('priority').value,
         document.getElementById('projectOption').value
     );
-    
     taskArray.push(newTask);
-
-    // KEEPING TRACK OF ARRAY
-    console.log(taskArray);
     // Creating a new task div
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('item');
@@ -77,7 +62,6 @@ export function createTask(e) {
     const taskProject = document.createElement('p');
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete');
-
     // Setting attributes to the task div
     taskArray.forEach(task => {
         taskDiv.setAttribute('id', task.id);
@@ -114,7 +98,6 @@ export function createTask(e) {
 // Creating Project
 export function createProject(e) {
     const projectOption = document.getElementById("projectOption")
-
     e.preventDefault();
 
     const newProject = new project(
@@ -123,7 +106,6 @@ export function createProject(e) {
     );
 
     projectArray.push(newProject);
-    console.log(projectArray);
 
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('projectContainer');
@@ -167,9 +149,6 @@ export function removeTask(e) {
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
     deleteTask(e.target.parentNode.id);
-
-    console.log("REMOVING TASK");
-    console.log(taskArray);
 }
 // --------------------------------------------------
 // REMOVING PROJECTS
@@ -178,9 +157,6 @@ export function removeProject(e) {
     const getProject = (id) => projectArray.find(project => project.id === id);
     const deleteProject = (id) => projectArray.splice(projectArray.indexOf(getProject(id)), 1);
     deleteProject(e.target.parentNode.id);
-
-    console.log("REMOVING PROJECT");
-    console.log(projectArray)
 }
 // --------------------------------------------------
 // REMOVING PROJECT OPTIONS FROM DROPDOWN

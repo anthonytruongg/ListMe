@@ -6,15 +6,12 @@ import { clearProjectContents } from "./clearContents";
 // This function reorganizes the tasks by 
 // cloning the array and sorting it by date
 export function printTodayArray() {
-    // This function formats 
     const todayDate = format(parseISO(new Date().toISOString()), "yyyy-MM-dd");
     const filteredDateArray = taskArray.filter(task => {
         return task.date === todayDate;
     })
     const mainBody = document.querySelector('.mainBody');
-    // const taskDiv = document.createElement('div');
-    // taskDiv.classList.add('item');
-
+    
     filteredDateArray.forEach(task => {
         const taskDiv = document.createElement('div');
         taskDiv.classList.add('item');
@@ -40,7 +37,6 @@ export function printTodayArray() {
         taskDate.style.fontSize = '1.5rem';
         taskDate.style.fontWeight = 'bold';
         taskDiv.appendChild(taskDate);
-        
     
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';
@@ -87,8 +83,6 @@ export function printOriginalArray() {
         const taskProject = document.createElement('p');
         taskProject.textContent = 'Project: ' + task.project;
         taskDiv.appendChild(taskProject);
-
-        
     
         if (task.priority === "4") {
             taskDiv.style.backgroundColor = '#f87171';
@@ -112,11 +106,7 @@ export function printPrioritizeTasks() {
         return (a.priority - b.priority)
     }).reverse();
 
-
-    console.log("PRINTING FILTERED TASKS")
     const mainBody = document.querySelector('.mainBody');
-    // const taskDiv = document.createElement('div');
-    // taskDiv.classList.add('item');
 
     filteredPriorityArray.forEach(task => {
         const taskDiv = document.createElement('div');
@@ -161,9 +151,8 @@ export function printPrioritizeTasks() {
 // This function prints the project array
 export function printProjectArray() {
     const mainBody = document.querySelector('.mainBody');
-    const projectOption = document.getElementById('projectOption');
+
     projectArray.forEach(project => {
-        
         const projectContainer = document.createElement('div');
         projectContainer.classList.add('projectContainer');
 
@@ -175,12 +164,6 @@ export function printProjectArray() {
         deleteButton.textContent = 'X';
         projectContainer.appendChild(deleteButton);
 
-        // creates project values for tasks
-        // const option = document.createElement('option');
-        // option.value = project.id;
-        // option.textContent = project.name;
-        // projectOption.appendChild(option);
-
         projectContainer.setAttribute('id', project.id);
         projectHeading.textContent = project.name;
         projectContainer.appendChild(projectHeading);
@@ -189,14 +172,6 @@ export function printProjectArray() {
         projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
         projectContainer.appendChild(projectDueDate);
 
-        // testing to see if clicking projects will open
-        // projectContainer.addEventListener('click', () => {
-        //     console.log("Clicking project" + project.id)
-        //     toggleProjectModal(project.id)
-        //     // viewProjectTasks(project.id)
-        // })
-
-
         mainBody.appendChild(projectContainer);
     })
 }
@@ -204,61 +179,56 @@ export function printProjectArray() {
 // VIEWING PROJECT TASKS
 export function viewProjectTasks(e) {
 projectArray.forEach(project => {
-        if (e.target.id === project.id) {
-            clearProjectContents();
-            toggleProjectModal();
-            console.log("Clicking project" + project.id)
-            const projectModalContent = document.querySelector('.projectModal-content');
+    if (e.target.id === project.id) {
+    clearProjectContents();
+    toggleProjectModal();
+    const projectModalContent = document.querySelector('.projectModal-content');
 
-            const projectHeading = document.createElement('h1');
-            projectHeading.setAttribute('class', 'mainHeading');
-            projectModalContent.appendChild(projectHeading);
-            const projectDate = document.createElement('h2');
-            projectDate.setAttribute('class', 'projectModalDate');
-            projectModalContent.appendChild(projectDate);
+    const projectHeading = document.createElement('h1');
+    projectHeading.setAttribute('class', 'mainHeading');
+    projectModalContent.appendChild(projectHeading);
+    const projectDate = document.createElement('h2');
+    projectDate.setAttribute('class', 'projectModalDate');
+    projectModalContent.appendChild(projectDate);
 
-            taskArray.forEach(task => {
-                if (task.project === project.name) {
-                    const projectItem = document.createElement('div');
-                    projectItem.classList.add('projectItem');
-                    projectItem.setAttribute('id', task.id);
+    taskArray.forEach(task => {
+    if (task.project === project.name) {
+        const projectItem = document.createElement('div');
+        projectItem.classList.add('projectItem');
+        projectItem.setAttribute('id', task.id);
 
-                    const projectTaskTitle = document.createElement('p');
-                    projectTaskTitle.setAttribute('class', 'projectTaskTitle');
-                    projectTaskTitle.textContent = task.title;
-                    projectItem.appendChild(projectTaskTitle);
+        const projectTaskTitle = document.createElement('p');
+        projectTaskTitle.setAttribute('class', 'projectTaskTitle');
+        projectTaskTitle.textContent = task.title;
+        projectItem.appendChild(projectTaskTitle);
 
-                    const projectItemDescription = document.createElement('p');
-                    projectItemDescription.setAttribute('class', 'projectDescription');
-                    projectItemDescription.textContent = task.description;
-                    projectItem.appendChild(projectItemDescription);
+        const projectItemDescription = document.createElement('p');
+        projectItemDescription.setAttribute('class', 'projectDescription');
+        projectItemDescription.textContent = task.description;
+        projectItem.appendChild(projectItemDescription);
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.classList.add('delete');
-                    deleteButton.textContent = '-';
-                    projectItem.appendChild(deleteButton);
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete');
+        deleteButton.textContent = '-';
+        projectItem.appendChild(deleteButton);
 
-                    if (task.priority === "4") {
-                        projectItem.style.backgroundColor = '#f87171';
-                    } else if (task.priority === "3") {
-                        projectItem.style.backgroundColor = '#facc15';
-                    } else if (task.priority === "2") {
-                        projectItem.style.backgroundColor = '#34d399';
-                    } else if (task.priority === "1") {
-                        projectItem.style.backgroundColor = '#38bdf8';
-                    }
-
-                    projectModalContent.appendChild(projectItem);
-
-                }
-            })
-
-
-        
-            projectHeading.textContent = project.name;
-            const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
-            projectDate.textContent = 'Due Date: ' + projectDateFormat;
+        if (task.priority === "4") {
+            projectItem.style.backgroundColor = '#f87171';
+        } else if (task.priority === "3") {
+            projectItem.style.backgroundColor = '#facc15';
+        } else if (task.priority === "2") {
+            projectItem.style.backgroundColor = '#34d399';
+        } else if (task.priority === "1") {
+            projectItem.style.backgroundColor = '#38bdf8';
         }
-})
+
+            projectModalContent.appendChild(projectItem);
+        }
+    })
+    projectHeading.textContent = project.name;
+    const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
+    projectDate.textContent = 'Due Date: ' + projectDateFormat;
+    }
+    })
 }
        
