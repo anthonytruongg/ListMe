@@ -21,10 +21,13 @@ import {
 
 import { clearContents } from './clearContents';
 
-import { viewProjectTasks } from './displayTasks';
+import { viewProjectTasks, printProjectOptions } from './displayTasks';
+
+import { taskArray, projectArray } from './taskFunctions';
 
 
 function DOMevents() {
+    // --------------------------------------------------
     // POP UP MODAL FORM
     const trigger = document.querySelector('.addTask');
     const closeButton = document.querySelector('.close-button');
@@ -40,7 +43,21 @@ function DOMevents() {
             alert('Please enter a date')
         } else {
         createTask(e);
+        // -------------------------------------------
+        // SAVING DATA
+        // checking to see if array in local storage is empty
+        if (localStorage.getItem('taskArray') === null) {
+            // if empty, then set the array
+            localStorage.setItem('taskArray', JSON.stringify(taskArray));
+        } else {
+            // if not empty, then add to the array
+            const existingStorage = localStorage.getItem('taskArray');
+            const existingArray = JSON.parse(existingStorage);
+            existingArray.push(taskArray[taskArray.length - 1]);
+            localStorage.setItem('taskArray', JSON.stringify(existingArray));
         }
+    }
+        // -------------------------------------------
     });
     // -------------------------------------------
     // CREATING A PROJECT BOX
@@ -53,6 +70,19 @@ function DOMevents() {
         } else {
             createProject(e);
             toggleAddProjectModal();
+            // -------------------------------------------
+            // SAVING DATA
+            // checking to see if array in local storage is empty
+            if (localStorage.getItem('projectArray') === null) {
+                // if empty, then set the array
+                localStorage.setItem('projectArray', JSON.stringify(projectArray));
+            } else {
+                // if not empty, then add to the array
+                const existingStorage = localStorage.getItem('projectArray');
+                const existingArray = JSON.parse(existingStorage);
+                existingArray.push(projectArray[projectArray.length - 1]);
+                localStorage.setItem('projectArray', JSON.stringify(existingArray));
+            }
         }
     });
     // -------------------------------------------
@@ -70,6 +100,7 @@ function DOMevents() {
             let theButton = e.target;
             let theTask = theButton.parentNode;
             theTask.remove();
+            // removing data
         }
     });
     // -------------------------------------------

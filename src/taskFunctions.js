@@ -38,12 +38,15 @@ export function windowOnClick(event) {
 // --------------------------------------------------
 // Array (currently contains sample tasks)
 const mainBody = document.querySelector('.mainBody');
+
 export const taskArray = [];
 
 export const projectArray = [];
+
 // --------------------------------------------------
 // Create Task Functions
 export function createTask(e) {
+
     e.preventDefault();
     const newTask = new task(
         document.getElementById('title').value,
@@ -52,7 +55,10 @@ export function createTask(e) {
         document.getElementById('priority').value,
         document.getElementById('projectOption').value
     );
+    
+    //-----------------------------------------------------
     taskArray.push(newTask);
+    // --------------------------------------------------
     // Creating a new task div
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('item');
@@ -93,6 +99,7 @@ export function createTask(e) {
         mainBody.appendChild(taskDiv);
     })
     document.getElementById("taskForm").reset();
+
 }
 // --------------------------------------------------
 // Creating Project
@@ -113,6 +120,7 @@ export function createProject(e) {
     const projectHeading = document.createElement('h2');
     const projectDueDate = document.createElement('h3')
     const option = document.createElement('option');
+    option.classList.add('optionDropDown');
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('deleteProject');
 
@@ -120,6 +128,8 @@ export function createProject(e) {
         option.setAttribute('id', project.id);
         option.textContent = project.name;
         projectOption.appendChild(option);
+
+        localStorage.setItem(project.id, JSON.stringify(project.name));
 
         projectContainer.setAttribute('id', project.id);
         projectHeading.textContent = project.name;
@@ -136,7 +146,6 @@ export function createProject(e) {
     })
     document.getElementById("projectForm").reset();
 }
-
 // --------------------------------------------------
 // Toggle Nav Bar
 export function toggleNav() {
@@ -146,24 +155,42 @@ export function toggleNav() {
 // --------------------------------------------------
 // Delete Task
 export function removeTask(e) {
+    const taskArray = JSON.parse(localStorage.getItem('taskArray'))
+
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
     deleteTask(e.target.parentNode.id);
+    // RESETTING LOCAL STORAGE
+
+    localStorage.setItem("taskArray", JSON.stringify(taskArray));
+
 }
 // --------------------------------------------------
 // REMOVING PROJECTS
 export function removeProject(e) {
     clearProjectContents();
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'))
+
     const getProject = (id) => projectArray.find(project => project.id === id);
     const deleteProject = (id) => projectArray.splice(projectArray.indexOf(getProject(id)), 1);
     deleteProject(e.target.parentNode.id);
+
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
 }
 // --------------------------------------------------
 // REMOVING PROJECT OPTIONS FROM DROPDOWN
 export function removeProjectOption(e) {
     const projectOption = document.getElementById("projectOption")
     const option = document.querySelector(`option[id="${e.target.parentNode.id}"]`);
-
     projectOption.removeChild(option);
+  
+
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'))
+    projectArray.forEach(project => {
+        if (project.id === e.target.parentNode.id) {
+            window.localStorage.removeItem(project.id);
+        }
+    })
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
     console.log("removing project option");
 }
