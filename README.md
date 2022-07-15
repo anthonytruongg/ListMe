@@ -10,6 +10,3 @@ Project "Todo List" from "The Odin Project"
 07/13
 - Merge to main
 
-07/14
-- Live Demo (NOT FULLY PUBLISHED, MAY HAVE BUGS)
-https://anthonytruongg.github.io/ListMe/
