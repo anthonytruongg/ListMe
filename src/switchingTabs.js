@@ -1,5 +1,5 @@
 import { printOriginalArray, printPrioritizeTasks, printProjectArray, printTodayArray } from "./displayTasks";
-import { windowOnClickProject, toggleProjectModal, toggleAddProjectModal } from "./taskFunctions";
+import { windowOnClickProject, toggleAddProjectModal } from "./taskFunctions";
 // --------------------------------------------------
 // HOME PAGE
 export function createHomePage() {
@@ -34,20 +34,13 @@ export function createProjectPage() {
     addProject.textContent = 'Click to add a Project!';
     mainBody.appendChild(addProject);
     printProjectArray();
-
-    // -------------------------------------------
-    // THIS IS THE PROJECT ITEM
     
     addProject.addEventListener('click', () => {
-        console.log("PROJECT MODAL OPEN")
+        //console.log("PROJECT MODAL OPEN")
         toggleAddProjectModal();
     });
-    
-    // -------------------------------------------
-    // const projectContainer = document.querySelector('.projectContainer');
-    // projectContainer.addEventListener('click', toggleProjectModal);
+   
     window.addEventListener('click', windowOnClickProject);
-
 }
 // --------------------------------------------------
 // PRIORITY PAGE

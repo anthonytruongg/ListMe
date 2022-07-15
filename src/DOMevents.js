@@ -5,10 +5,10 @@ import {
     createTask,
     toggleNav, 
     removeTask,
+    removeProject,
     createProject,
     toggleAddProjectModal,
-    toggleProjectModal,
-    viewProjectTasks,
+    removeProjectOption,
 } from './taskFunctions';
 
 import {
@@ -19,13 +19,15 @@ import {
     createPriorityPage,
 } from './switchingTabs';
 
-import { clearContents, clearProjectContents } from './clearContents';
+import { clearContents } from './clearContents';
 
-import { projectArray } from './taskFunctions';
-import { format, parseISO } from "date-fns";
+import { viewProjectTasks, printProjectOptions } from './displayTasks';
+
+import { taskArray, projectArray } from './taskFunctions';
 
 
 function DOMevents() {
+    // --------------------------------------------------
     // POP UP MODAL FORM
     const trigger = document.querySelector('.addTask');
     const closeButton = document.querySelector('.close-button');
@@ -41,7 +43,21 @@ function DOMevents() {
             alert('Please enter a date')
         } else {
         createTask(e);
+        // -------------------------------------------
+        // SAVING DATA
+        // checking to see if array in local storage is empty
+        if (localStorage.getItem('taskArray') === null) {
+            // if empty, then set the array
+            localStorage.setItem('taskArray', JSON.stringify(taskArray));
+        } else {
+            // if not empty, then add to the array
+            const existingStorage = localStorage.getItem('taskArray');
+            const existingArray = JSON.parse(existingStorage);
+            existingArray.push(taskArray[taskArray.length - 1]);
+            localStorage.setItem('taskArray', JSON.stringify(existingArray));
         }
+    }
+        // -------------------------------------------
     });
     // -------------------------------------------
     // CREATING A PROJECT BOX
@@ -54,35 +70,28 @@ function DOMevents() {
         } else {
             createProject(e);
             toggleAddProjectModal();
+            // -------------------------------------------
+            // SAVING DATA
+            // checking to see if array in local storage is empty
+            if (localStorage.getItem('projectArray') === null) {
+                // if empty, then set the array
+                localStorage.setItem('projectArray', JSON.stringify(projectArray));
+            } else {
+                // if not empty, then add to the array
+                const existingStorage = localStorage.getItem('projectArray');
+                const existingArray = JSON.parse(existingStorage);
+                existingArray.push(projectArray[projectArray.length - 1]);
+                localStorage.setItem('projectArray', JSON.stringify(existingArray));
+            }
         }
     });
     // -------------------------------------------
     // VIEWING PROJECTS
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('projectContainer')){
-            projectArray.forEach(project => {
-                if (e.target.id === project.id) {
-                    clearProjectContents();
-                    toggleProjectModal();
-                    console.log("Clicking project" + project.id)
-                    const projectModalContent = document.querySelector('.projectModal-content');
-
-                    const projectHeading = document.createElement('h1');
-                    projectHeading.setAttribute('class', 'mainHeading');
-                    projectModalContent.appendChild(projectHeading);
-                    const projectDate = document.createElement('h2');
-                    projectDate.setAttribute('class', 'projectDate');
-                    projectModalContent.appendChild(projectDate);
-
-                
-                    projectHeading.textContent = project.name;
-                    const projectDateFormat = format(parseISO(project.date), 'MM/dd/yyyy');
-                    projectDate.textContent = 'Due Date: ' + projectDateFormat;
-                }
-        })
+            viewProjectTasks(e);
         }
-    });
-       
+    })
     // -------------------------------------------
     // REMOVING TASKS
     document.addEventListener('click', function(e) {
@@ -91,8 +100,21 @@ function DOMevents() {
             let theButton = e.target;
             let theTask = theButton.parentNode;
             theTask.remove();
+            // removing data
         }
     });
+    // -------------------------------------------
+    // REMOVING PROJECTS
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('deleteProject')) {
+            removeProjectOption(e);
+            removeProject(e);
+            let theButton = e.target;
+            let theProject = theButton.parentNode;
+            theProject.remove();
+        } 
+    });
+
     // -------------------------------------------
     // TOGGLING SIDE NAV BAR
     const menu = document.querySelector('.menuButton');

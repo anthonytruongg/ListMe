@@ -1,5 +1,6 @@
-import { task, project } from "./taskDetails";
+import { task, project } from "./constructors";
 import { format, parseISO } from "date-fns";
+import { clearProjectContents } from "./clearContents";
 // --------------------------------------------------
 // Modal Toggle Functions
 export function toggleModal() {
@@ -16,7 +17,6 @@ export function toggleAddProjectModal() {
 }
 // --------------------------------------------------
 // Window click events
-
 export function windowOnClickProject(event) {
     const modal = document.querySelector('.projectModal');
     const modalTwo = document.querySelector('.addProjectModal');
@@ -38,34 +38,27 @@ export function windowOnClick(event) {
 // --------------------------------------------------
 // Array (currently contains sample tasks)
 const mainBody = document.querySelector('.mainBody');
-export const taskArray = [ 
-    new task('Task 1', 'This is a task', '2022-08-04', '1'),
-    new task('Task 2', 'This is a task', '2022-07-23', '2'),
-    new task('Task 3', 'This is a task', '2022-07-12', '3'),
-    new task('Task 4', 'This is a task', '2022-07-11', '4'),
-];
 
-export const projectArray = [
-    new project('Project 1', '2022-08-04'),
-    new project('Project 2', '2022-07-23'),
-    new project('Project 3', '2022-07-12'),
-];
+export const taskArray = [];
+
+export const projectArray = [];
+
 // --------------------------------------------------
 // Create Task Functions
 export function createTask(e) {
+
     e.preventDefault();
-    
     const newTask = new task(
         document.getElementById('title').value,
         document.getElementById('description').value,
         document.getElementById('date').value,
         document.getElementById('priority').value,
+        document.getElementById('projectOption').value
     );
     
+    //-----------------------------------------------------
     taskArray.push(newTask);
-
-    // KEEPING TRACK OF ARRAY
-    console.log(taskArray);
+    // --------------------------------------------------
     // Creating a new task div
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('item');
@@ -75,7 +68,6 @@ export function createTask(e) {
     const taskProject = document.createElement('p');
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete');
-
     // Setting attributes to the task div
     taskArray.forEach(task => {
         taskDiv.setAttribute('id', task.id);
@@ -107,12 +99,12 @@ export function createTask(e) {
         mainBody.appendChild(taskDiv);
     })
     document.getElementById("taskForm").reset();
+
 }
 // --------------------------------------------------
 // Creating Project
 export function createProject(e) {
     const projectOption = document.getElementById("projectOption")
-
     e.preventDefault();
 
     const newProject = new project(
@@ -121,7 +113,6 @@ export function createProject(e) {
     );
 
     projectArray.push(newProject);
-    console.log(projectArray);
 
     const projectContainer = document.createElement('div');
     projectContainer.classList.add('projectContainer');
@@ -129,10 +120,16 @@ export function createProject(e) {
     const projectHeading = document.createElement('h2');
     const projectDueDate = document.createElement('h3')
     const option = document.createElement('option');
+    option.classList.add('optionDropDown');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('deleteProject');
 
     projectArray.forEach(project => {
+        option.setAttribute('id', project.id);
         option.textContent = project.name;
         projectOption.appendChild(option);
+
+        localStorage.setItem(project.id, JSON.stringify(project.name));
 
         projectContainer.setAttribute('id', project.id);
         projectHeading.textContent = project.name;
@@ -142,24 +139,58 @@ export function createProject(e) {
         projectDueDate.textContent = 'Due Date: ' + projectDateFormat;
         projectContainer.appendChild(projectDueDate);
 
+        deleteButton.textContent = 'X';
+        projectContainer.appendChild(deleteButton);
+
         mainBody.appendChild(projectContainer);
     })
     document.getElementById("projectForm").reset();
 }
 // --------------------------------------------------
-// Viewing Project Tasks
-
-
-// --------------------------------------------------
-// Removing Task Functions + Toggle Nav Bar
+// Toggle Nav Bar
 export function toggleNav() {
     const sideNav = document.querySelector('.sideNav');
     sideNav.classList.toggle('sideNav-open');
 }
+// --------------------------------------------------
+// Delete Task
 export function removeTask(e) {
+    const taskArray = JSON.parse(localStorage.getItem('taskArray'))
+
     const getTask = (id) => taskArray.find(task => task.id === id);
     const deleteTask = (id) => taskArray.splice(taskArray.indexOf(getTask(id)), 1);
     deleteTask(e.target.parentNode.id);
+    // RESETTING LOCAL STORAGE
 
-    console.log("REMOVING TASK");
+    localStorage.setItem("taskArray", JSON.stringify(taskArray));
+
+}
+// --------------------------------------------------
+// REMOVING PROJECTS
+export function removeProject(e) {
+    clearProjectContents();
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'))
+
+    const getProject = (id) => projectArray.find(project => project.id === id);
+    const deleteProject = (id) => projectArray.splice(projectArray.indexOf(getProject(id)), 1);
+    deleteProject(e.target.parentNode.id);
+
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+}
+// --------------------------------------------------
+// REMOVING PROJECT OPTIONS FROM DROPDOWN
+export function removeProjectOption(e) {
+    const projectOption = document.getElementById("projectOption")
+    const option = document.querySelector(`option[id="${e.target.parentNode.id}"]`);
+    projectOption.removeChild(option);
+  
+
+    const projectArray = JSON.parse(localStorage.getItem('projectArray'))
+    projectArray.forEach(project => {
+        if (project.id === e.target.parentNode.id) {
+            window.localStorage.removeItem(project.id);
+        }
+    })
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+    console.log("removing project option");
 }
