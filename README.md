@@ -9,3 +9,6 @@ Project "Todo List" from "The Odin Project"
 
 07/13
 - Merge to main
+
+07/14
+- Finally added project local storage functionality, going to organize code now
