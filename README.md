@@ -12,3 +12,4 @@ Project "Todo List" from "The Odin Project"
 
 07/14
 - Finally added project local storage functionality, going to organize code now
+- Need to test for bugs
