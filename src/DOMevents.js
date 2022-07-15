@@ -21,7 +21,7 @@ import {
 
 import { clearContents } from './clearContents';
 
-import { viewProjectTasks, printProjectOptions } from './displayTasks';
+import { viewProjectTasks } from './displayTasks';
 
 import { taskArray, projectArray } from './taskFunctions';
 
