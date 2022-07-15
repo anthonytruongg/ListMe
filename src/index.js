@@ -1,6 +1,8 @@
 import DOMevents from '././DOMevents';
-import { printOriginalArray } from './displayTasks';
+import { printOriginalArray, printProjectOptions } from './displayTasks';
+import { taskArray, projectArray } from './taskFunctions';
 
+printProjectOptions();
 printOriginalArray();
 DOMevents();
 
