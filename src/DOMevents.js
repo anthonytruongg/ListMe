@@ -41,6 +41,7 @@ function DOMevents() {
     addButton.addEventListener('click', function(e) {
         if (document.getElementById('date').value === '') {
             alert('Please enter a date')
+            toggleModal();
         } else {
         createTask(e);
         // -------------------------------------------
