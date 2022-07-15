@@ -60,13 +60,11 @@ export function printTodayArray() {
 // --------------------------------------------------
 // This function prints original task array
 export function printOriginalArray() {
-    console.log("PRINTING ORIGINAL ARRAY")
     const mainBody = document.querySelector('.mainBody');
     // RETRIEVING DATA FROM LOCAL STORAGE
     // CHECKING IF THERE IS DATA IN LOCAL STORAGE
     if (localStorage.getItem('taskArray') === null) { return }
     else { const taskArray = JSON.parse(localStorage.getItem('taskArray'));
-    console.log(taskArray)
     // --------------------------------------------------
     taskArray.forEach(task => {
         const taskDiv = document.createElement('div');
@@ -271,7 +269,7 @@ export function printProjectOptions() {
         option.setAttribute('id', project.id);
         option.textContent = project.name;
         projectOption.appendChild(option);
-        console.log(option)
+
     })
 } 
 }

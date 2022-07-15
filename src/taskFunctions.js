@@ -192,5 +192,4 @@ export function removeProjectOption(e) {
         }
     })
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
-    console.log("removing project option");
 }

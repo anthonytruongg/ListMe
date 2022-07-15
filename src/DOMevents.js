@@ -1,4 +1,3 @@
-
 import { 
     toggleModal,
     windowOnClick, 
@@ -24,8 +23,6 @@ import { clearContents } from './clearContents';
 import { viewProjectTasks } from './displayTasks';
 
 import { taskArray, projectArray } from './taskFunctions';
-
-
 function DOMevents() {
     // --------------------------------------------------
     // POP UP MODAL FORM
@@ -115,7 +112,6 @@ function DOMevents() {
             theProject.remove();
         } 
     });
-
     // -------------------------------------------
     // TOGGLING SIDE NAV BAR
     const menu = document.querySelector('.menuButton');
@@ -155,8 +151,6 @@ function DOMevents() {
         clearContents();
         createPriorityPage();
     });
-
-
 }
 
 export default DOMevents;
