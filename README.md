@@ -1,6 +1,9 @@
 # ListMe
 Project "Todo List" from "The Odin Project"
 
+## Live Preview
+https://anthonytruongg.github.io/ListMe/
+
 07/11
 - Need to add project functionality to array
 - Add project to array
@@ -13,4 +16,3 @@ Project "Todo List" from "The Odin Project"
 07/14
 - Finally added project local storage functionality, going to organize code now
 - Need to test for bugs; merge branches
-- TEST SERVER: https://anthonytruongg.github.io/ListMe/
